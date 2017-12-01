@@ -1,69 +1,60 @@
-const path = require('path');
-const webpack = require("webpack");
+const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const OpenBrowserWebpackPlugin = require("open-browser-webpack-plugin");
+const webpack = require("webpack");
 
-module.exports = {
-    entyr:{
-        index:path.resolve(__dirname,"app/index.jsx")
+const config = {
+    entry: {
+        index: "./app/index.js",
     },
-    output:{
-        path:"/build",
-        filename:"[name].bundle.js"
-    },
-    resolve:{//省略require时的后缀名
-        extensions:[
-            "",".js","jsx" 
-        ]
-    },
-    module:{
-        rules: [
-            { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel' },
-            { test: /\.less$/, exclude: /node_modules/, loader: 'style!css!postcss!less' },
-            { test: /\.css$/, exclude: /node_modules/, loader: 'style!css!postcss' },
-            { test:/\.(png|gif|jpg|jpeg|bmp)$/i, loader:'url-loader?limit=5000' },  // 限制大小5kb
-            { test:/\.(png|woff|woff2|svg|ttf|eot)($|\?)/i, loader:'url-loader?limit=5000'} // 限制大小小于5k
-        ]
-    },
-    eslint:{
-        configFile:".eslintrc",//代码检查
-    },
-    postcss:[
-        require("autoprefixer"),//自动补全前缀
-    ],
-    plugins:[
-        //html模板插件
-        new HtmlWebpackPlugin({
-            template:__dirname + "app/index.html"
-        }),
-
-        //热加载插件
-        new webpack.HotModuleReplacementPlugin(),
-
-        //打开浏览器插件
-        new OpenBrowserWebpackPlugin({
-            url:"localhost:8080"
-        }),
-        // 可在业务 js 代码中使用 __DEV__ 判断是否是dev模式（dev模式下可以提示错误、测试报告等, production模式不提示）
-        new webpack.DefinePlugin({
-            __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
-          })
-    ],
-    //mock数据
+    devtool: 'inline-source-map',//页面报错在哪一行
     devServer: {
-        proxy: {
-          // 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
-          // koa 代码在 ./mock 目录中，启动命令为 npm run mock
-          '/api': {
-            target: 'http://localhost:3000',
-            secure: false
-          }
-        },
-        contentBase: "./public", //本地服务器所加载的页面所在的目录
-        colors: true, //终端中输出结果为彩色
-        historyApiFallback: true, //不跳转
-        inline: true, //实时刷新
-        hot: true  // 使用热加载插件 HotModuleReplacementPlugin
-    }
-    
+        contentBase: path.join(__dirname, "build"),
+        compress: true,
+        port: 9000
+    },
+    plugins: [
+        new CleanWebpackPlugin(['build']),//清理没有用到的文件
+        new HtmlWebpackPlugin({//自动将打包的问题到index.html并且生成index.html
+            title: "this is my test file",
+            template:"./app/index.html"
+        }),
+        new OpenBrowserWebpackPlugin({//启动服务之后自动打开页面
+            url:"http://localhost:9000"
+        }),
+        new webpack.HotModuleReplacementPlugin(),//热更新
+        
+    ],
+    output: {
+        filename: "[name][hash].bundle.js",
+        path: path.resolve(__dirname, "./build"),
+        publicPath:"/"
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "postcss-loader"
+                ]
+            },
+            {
+                test:/\.(js|jsx)$/,
+                use:[
+                    "babel-loader"
+                ]
+            },
+            {
+                test:/\.(jpg|png)$/,
+                use:[
+                    "url-loader?limit=8192&name=images/[hash:8].name.[ext]"//图片大小小于8KB，转换为base64，指定打包的路径并加上hash值
+                ]
+            }
+        ]
+    },
 }
+
+module.exports = config;
