@@ -30,6 +30,9 @@ const config = {
         new webpack.HotModuleReplacementPlugin(),//热更新
         
     ],
+    postcss: [
+        require('autoprefixer') //调用autoprefixer插件，例如 display: flex
+    ],
     output: {
         filename: "[name][hash].bundle.js",
         path: path.resolve(__dirname, "./build"),
@@ -37,14 +40,15 @@ const config = {
     },
     module: {
         rules: [
-            // {
-            //     test: /\.css$/,
-            //     use: [
-            //         "style-loader",
-            //         "css-loader",
-            //         "postcss-loader"
-            //     ]
-            // },
+            {
+                test: /\.(css|less)$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "postcss-loader",
+                    "less-loader"
+                ]
+            },
             {
                 test: /\.(js|jsx)$/,
                 use: [
