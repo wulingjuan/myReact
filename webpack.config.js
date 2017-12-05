@@ -27,12 +27,12 @@ const config = {
         new OpenBrowserWebpackPlugin({//启动服务之后自动打开页面
             url:"http://localhost:9000"
         }),
-        new webpack.HotModuleReplacementPlugin(),//热更新
+        new webpack.HotModuleReplacementPlugin(),//热加载
         
     ],
-    postcss: [
-        require('autoprefixer') //调用autoprefixer插件，例如 display: flex
-    ],
+    // postcss: [
+    //     require('autoprefixer') //调用autoprefixer插件，例如 display: flex
+    // ],
     output: {
         filename: "[name][hash].bundle.js",
         path: path.resolve(__dirname, "./build"),
@@ -45,7 +45,6 @@ const config = {
                 use: [
                     "style-loader",
                     "css-loader",
-                    "postcss-loader",
                     "less-loader"
                 ]
             },

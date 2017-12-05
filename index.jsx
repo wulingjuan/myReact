@@ -25,7 +25,6 @@ class Button extends Component {
                 <button className={`btn btn-${color}`} onClick={this.clickHandle.bind(this)}>{text}</button>
                 {/* {5>1?<p>5大于1</p>:<p>1大于5</p>} jsx注释*/}
                 <p style={{color:true?"deeppink":"#333"}}>you are so beautiful!</p>
-                <Hello/>
                 <ul>
                     {arr.map((item, index) => (<li key={index}>{item}</li>))}
                 </ul>
