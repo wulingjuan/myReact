@@ -15,6 +15,7 @@ const config = {
         compress: true,
         port: 9000
     },
+    
     resolve: {
         extensions: ['.js', '.jsx', '.css']
     },
