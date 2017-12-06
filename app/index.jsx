@@ -1,5 +1,7 @@
 import React ,{Component} from "react";
 import ReactDOM from "react-dom";
+import List from "./containers/Hello/subpage/List";
+import Todo from "./containers/Todo/Todo";
 
 class Button extends Component {
     constructor(props) {
@@ -28,6 +30,8 @@ class Button extends Component {
                 <ul>
                     {arr.map((item, index) => (<li key={index}>{item}</li>))}
                 </ul>
+                <List title="hello world"/>
+                <Todo />
             </div>
 
         )
