@@ -7,7 +7,7 @@ const webpack = require("webpack");
 
 const config = {
     entry: {
-        index: path.resolve(__dirname,"index.jsx")
+        index: path.resolve(__dirname,"./app/index.jsx")
     },
     devtool: 'inline-source-map',//页面报错在哪一行
     devServer: {
@@ -23,7 +23,7 @@ const config = {
         new CleanWebpackPlugin(['build']),//清理没有用到的文件
         new HtmlWebpackPlugin({//自动将打包的问题到index.html并且生成index.html
             title: "this is my test file",
-            template: path.resolve(__dirname,"index.temp.html")
+            template: path.resolve(__dirname,"./app/index.temp.html")
         }),
         new OpenBrowserWebpackPlugin({//启动服务之后自动打开页面
             url:"http://localhost:9000"
@@ -56,12 +56,12 @@ const config = {
                 ],
                 exclude: /node_modules/
             },
-            // {
-            //     test:/\.(jpg|png)$/,
-            //     use:[
-            //         "url-loader?limit=8192&name=images/[hash:8].name.[ext]"//图片大小小于8KB，转换为base64，指定打包的路径并加上hash值
-            //     ]
-            // }
+            {
+                test:/\.(jpg|png)$/,
+                use:[
+                    "url-loader?limit=8192&name=images/[hash:8].name.[ext]"//图片大小小于8KB，转换为base64，指定打包的路径并加上hash值
+                ]
+            }
         ]
     },
 }

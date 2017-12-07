@@ -4,7 +4,9 @@ import ReactDOM from "react-dom";
 export default class Hello extends Component{
     render(){
         return (
-            <div>practice makes perfect!</div>
+            <div>
+                <p>Detail,url的参数：{this.props.params.id}</p>
+            </div>
         )
     }
 }
