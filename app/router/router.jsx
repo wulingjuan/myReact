@@ -1,10 +1,13 @@
 import React ,{Component} from "react";
 import {Router,Route,IndexRoute} from "react-router";
 
+import configStore from "../store/index.js";
+import {Provider} from "react-redux";
 import App from "../containers/App";
 import Home from "../containers/Home/index";
 import List from "../containers/List/index";
 import Detail from "../containers/Detail/index";
+import Hello from "../containers/Hello/Hello";
 import NotFound from "../containers/NotFound/index";
 
 export default class RouteMap extends Component{
@@ -13,15 +16,19 @@ export default class RouteMap extends Component{
         // 统计PV
     }
     render(){
+        const store = configStore()
         return (
-           <Router history={this.props.history} onUpdate={this.updateHandler.bind(this)}>
-               <Route path='/' component={App}>
-                    <IndexRoute component={Home}/>
-                    <Route path='list' component={List} />
-                    <Route path='detail/:id' component={Detail} />
-                    <Route path='*' component={NotFound} />
-               </Route>
-           </Router>
+            <Provider store={store}>
+                <Router history={this.props.history} onUpdate={this.updateHandler.bind(this)}>
+                    <Route path='/' component={App}>
+                        <IndexRoute component={Home} />
+                        <Route path='list' component={List} />
+                        <Route path='detail/:id' component={Detail} />
+                        <Route path='hello' component={Hello} />
+                        <Route path='*' component={NotFound} />
+                    </Route>
+                </Router>
+            </Provider>
         )
     }
 }

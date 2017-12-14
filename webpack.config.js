@@ -9,7 +9,7 @@ const config = {
     entry: {
         index: path.resolve(__dirname,"./app/index.jsx")
     },
-    devtool: 'inline-source-map',//页面报错在哪一行
+    devtool: 'source-map',//页面报错在哪一行
     devServer: {
         contentBase: path.join(__dirname, "build"),
         compress: true,
@@ -47,7 +47,8 @@ const config = {
                     "style-loader",
                     "css-loader",
                     "less-loader"
-                ]
+                ],
+                exclude: /node_modules/
             },
             {
                 test: /\.(js|jsx)$/,
