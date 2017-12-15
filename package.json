@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "mock": "node ./mock/server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,10 @@
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.23.1",
     "html-webpack-plugin": "^2.30.1",
+    "koa": "^2.4.1",
+    "koa-body": "^2.5.0",
+    "koa-router": "^7.3.0",
+    "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "open-browser-webpack-plugin": "^0.0.5",
     "postcss-loader": "^0.9.1",
@@ -38,7 +43,9 @@
     "webpack-dev-server": "^2.2.1"
   },
   "dependencies": {
+    "es6-promise": "^4.1.1",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react-dom": "^15.3.0",
+    "whatwg-fetch": "^2.0.3"
   }
 }

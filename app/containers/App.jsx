@@ -1,7 +1,7 @@
 import React ,{Component} from "react";
 import {Link} from "react-router-dom";
 import fn from "../redux-demo.js";
-fn();
+// fn();
 export default class App extends Component{
     constructor(props){
         super(props);
