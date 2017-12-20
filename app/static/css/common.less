@@ -1,0 +1,37 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background: #f1f1f1;
+    *{
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        font-family: "微软雅黑",'Times New Roman', Times, serif;
+        font-size: 14px;
+    }
+}
+ul li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+input{
+    outline: none;
+}
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+.clear-fix{
+    &:after{
+        content: " ";
+        display: block;
+        font-size: 0;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}

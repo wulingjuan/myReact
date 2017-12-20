@@ -11,3 +11,9 @@ export const updateCity = (data) => {
         data
     }
 }
+export const getAd = (data) => {
+    return {
+        type: actionTypes.GET_AD,
+        data
+    }
+}

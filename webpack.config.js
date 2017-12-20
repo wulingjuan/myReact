@@ -25,7 +25,7 @@ const config = {
     },
     
     resolve: {
-        extensions: ['.js', '.jsx', '.css']
+        extensions: ['.js', '.jsx', '.css','.less']
     },
     plugins: [
         new CleanWebpackPlugin(['build']),//清理没有用到的文件
@@ -37,13 +37,16 @@ const config = {
             url:"http://localhost:9000"
         }),
         new webpack.HotModuleReplacementPlugin(),//热加载
-        
+        // require('autoprefixer')()//调用autoprefixer插件，例如 display: flex
+        // require("autoprefixer")
+        // 可在业务 js 代码中使用 __DEV__ 判断是否是dev模式（dev模式下可以提示错误、测试报告等, production模式不提示）
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
+        })
     ],
-    // postcss: [
-    //     require('autoprefixer') //调用autoprefixer插件，例如 display: flex
-    // ],
+    
     output: {
-        filename: "[name][hash].bundle.js",
+        filename: "[name][hash:5].bundle.js",
         path: path.resolve(__dirname, "./build"),
         publicPath:"/"
     },
@@ -54,7 +57,8 @@ const config = {
                 use: [
                     "style-loader",
                     "css-loader",
-                    "less-loader"
+                    "less-loader",
+                    // "postcss-loader"
                 ],
                 exclude: /node_modules/
             },
@@ -66,11 +70,11 @@ const config = {
                 exclude: /node_modules/
             },
             {
-                test:/\.(jpg|png)$/,
+                test:/\.(png|gif|jpg|jpeg|bmp|woff|woff2|svg|ttf|eot)$/,
                 use:[
-                    "url-loader?limit=8192&name=images/[hash:8].name.[ext]"//图片大小小于8KB，转换为base64，指定打包的路径并加上hash值
+                    "url-loader?limit=8192&name=imgs/ad/[name][hash:8].[ext]"//图片大小小于8KB，转换为base64，指定打包的路径并加上hash值
                 ]
-            }
+            },
         ]
     },
 }
