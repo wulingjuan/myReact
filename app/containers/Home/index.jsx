@@ -3,43 +3,85 @@ import HomeHeader from "../../components/Header/HomeHeader";
 import Category from "../../components/Category/Category";
 import Ad from "../Home/subpage/Ad";
 import List from "../Home/subpage/List";
+import { getHomeAdData } from "./../../../fetch/home/home.js";
+import { getListData } from "./../../../fetch/home/home.js";
 // import fn from "../redux-demo.js";
 // fn();
 import {connect} from "react-redux";
-const adLists = ["./imgs/ad/car.png", "./imgs/ad/movie.png", "./imgs/ad/summer.png", "./imgs/ad/hot_sell.png", "./imgs/ad/piano.png", "./imgs/ad/go_abroad.png"]
-var arr = []
-var a = "";
-for (var i = 0; i < adLists.length; i++) {
-    (function(i){
-        a = require(`${adLists[i]}`)
-        arr.push(a)
-    })(i)
-}
+
 class Home extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            data:[],
+            dataLsit:[]
+        }
+    }
+    componentDidMount(){
+        this.getAdInfo();
+        this.getListInfo();
+    }
+    getAdInfo(){
+        const result = getHomeAdData();
+        result.then(data => {
+            return data.json();
+        }).then(json => {
+            const adLists = json;
+            var arr = [];
+            var str = "";
+            for (var i = 0; i < adLists.length; i++) {
+                (function (i) {
+                    str = require(`${adLists[i].img}`);
+                    arr.push(str)
+                })(i)
+            }
+            this.setState({
+                data: arr
+            })
+        })
+    }
+    getListInfo(){
+        const page = this.props.loadmore.page;
+        console.log(page)
+        const result = getListData(this.props.cityInfo.cityName,0);
+        result.then(data => {
+            return data.json();
+        }).then(json => {
+            const adLists = json.data;
+            console.log(adLists)
+            var arr = [];
+            var str = "";
+            for (var i = 0; i < adLists.length; i++) {
+                (function (i) {
+                    str = require(`${adLists[i].img}`);
+                    arr.push(str)
+                })(i)
+            }
+            this.setState({
+                dataLsit: this.state.dataLsit.concat(arr)
+            })
+        })
+    }
     render() {
+        const data = this.state.data;
+        const dataLsit = this.state.dataLsit;
         return (
             <div>
                 <HomeHeader cityName={this.props.cityInfo.cityName} />
                 <Category />
                 <div style={{height:15}}></div>
-                <Ad arr={arr}/>
-                <List cityName={this.props.cityInfo.cityName}/>
-                <div style={{ height: 15 }}></div>
+                <Ad data={data}/>
+                <List cityName={this.props.cityInfo.cityName} data={dataLsit} getListInfo={this.getListInfo.bind(this)}/>
             </div>
         )
     }
 }
 function mapStateToProps(state) {
     return {
-        cityInfo: state.cityinfo
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        
+        cityInfo: state.cityinfo,
+        loadmore:state.loadmore
     }
 }
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
 )(Home)

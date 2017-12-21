@@ -1,9 +1,9 @@
 import {combineReducers} from "redux";
-import userinfo from "./userinfo.jsx";
-import cityinfo from "./cityinfo.jsx";
-
+import userinfo from "./userinfo";
+import cityinfo from "./cityinfo";
+import loadmore from "./loadmore";
 const rootReducer = combineReducers({
-    userinfo,cityinfo
+    userinfo,cityinfo,loadmore
 });
 
 export default rootReducer;

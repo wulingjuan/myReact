@@ -6,13 +6,12 @@ import {connect} from "react-redux";
 class Ad extends Component{
     constructor(props){
         super(props);
-        this.state ={
-            data:[]
-        }
+    }
+    componentDidMount(){
+        
     }
     render(){
-        const dataList = this.state.data;
-        const imgList = this.props.arr;
+        const imgList = this.props.data;
         return(
             <div id="home-ad">
                 <ul className="clear-fix">

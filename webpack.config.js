@@ -72,7 +72,7 @@ const config = {
             {
                 test:/\.(png|gif|jpg|jpeg|bmp|woff|woff2|svg|ttf|eot)$/,
                 use:[
-                    "url-loader?limit=8192&name=imgs/ad/[name][hash:8].[ext]"//图片大小小于8KB，转换为base64，指定打包的路径并加上hash值
+                    "url-loader?limit=8192&name=images/[name][hash:8].[ext]"//图片大小小于8KB，转换为base64，指定打包的路径并加上hash值
                 ]
             },
         ]

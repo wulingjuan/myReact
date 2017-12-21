@@ -17,3 +17,9 @@ export const getAd = (data) => {
         data
     }
 }
+export const loadMore = (data) => {
+    return {
+        type:'LOAD_MORE',
+        data
+    }
+}
