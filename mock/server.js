@@ -1,31 +1,28 @@
-var koa = require('koa');
-var koaRouter = require('koa-router');
-var koaBody = require('koa-body');
+var app = require('koa')();
+var router = require('koa-router')();
+// var kaBoby = require('koa-body');
 
-var app = new koa();
-var router = new koaRouter();
-var kaBobyData = new koaBody();
-router.get('/', function* (next) {
-    this.body = 'hello koa !'
-});
 
-router.get('/api', function* (next) {
-    this.body = 'test data'
-});
-router.get('/api/1', function* (next) {
-    this.body = 'test data 1'
-});
-router.get('/api/2', function* (next) {
-    this.body = {
-        a: 1,
-        b: '123'
-    }
-});
+// router.post('/api/post', koaBody, function* (next) {
+//     console.log(this.request.body)
+//     this.body = JSON.stringify(this.request.body)
+// });
 
-router.post('/api/post', koaBody, function* (next) {
-    console.log(this.request.body)
-    this.body = JSON.stringify(this.request.body)
-});
+// 优惠广告
+var homeData = require('./home/ad');
+router.get('/api/homead',function*(next){
+    this.body = homeData;
+})
+
+// 推荐列表
+var homeList = require('./home/list');
+router.get('/api/homelist/:city/:page', function* (next) {
+    this.body = homeList;
+    const params = this.params;
+    const city = params.city;
+    const page = params.page;
+})
+
 
 app.use(router.routes())
     .use(router.allowedMethods());

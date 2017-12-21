@@ -1,10 +1,11 @@
 import React ,{Component} from "react";
 import ReactDOM from "react-dom";
+import Header from  "../../components/Header/Header";
 
 export default class Hello extends Component{
     render(){
         return (
-            <div>practice makes perfect!</div>
+            <div>Hello World</div>
         )
     }
 }

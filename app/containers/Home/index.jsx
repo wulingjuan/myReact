@@ -1,17 +1,87 @@
-import React ,{Component} from "react";
-import ReactDOM from "react-dom";
-import {Link} from "react-router";
+import React, { Component } from "react";
+import HomeHeader from "../../components/Header/HomeHeader";
+import Category from "../../components/Category/Category";
+import Ad from "../Home/subpage/Ad";
+import List from "../Home/subpage/List";
+import { getHomeAdData } from "./../../../fetch/home/home.js";
+import { getListData } from "./../../../fetch/home/home.js";
+// import fn from "../redux-demo.js";
+// fn();
+import {connect} from "react-redux";
 
-
-export default class Hello extends Component{
-    render(){
+class Home extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            data:[],
+            dataLsit:[]
+        }
+    }
+    componentDidMount(){
+        this.getAdInfo();
+        this.getListInfo();
+    }
+    getAdInfo(){
+        const result = getHomeAdData();
+        result.then(data => {
+            return data.json();
+        }).then(json => {
+            const adLists = json;
+            var arr = [];
+            var str = "";
+            for (var i = 0; i < adLists.length; i++) {
+                (function (i) {
+                    str = require(`${adLists[i].img}`);
+                    arr.push(str)
+                })(i)
+            }
+            this.setState({
+                data: arr
+            })
+        })
+    }
+    getListInfo(){
+        const page = this.props.loadmore.page;
+        console.log(page)
+        const result = getListData(this.props.cityInfo.cityName,0);
+        result.then(data => {
+            return data.json();
+        }).then(json => {
+            const adLists = json.data;
+            console.log(adLists)
+            var arr = [];
+            var str = "";
+            for (var i = 0; i < adLists.length; i++) {
+                (function (i) {
+                    str = require(`${adLists[i].img}`);
+                    arr.push(str)
+                })(i)
+            }
+            this.setState({
+                dataLsit: this.state.dataLsit.concat(arr)
+            })
+        })
+    }
+    render() {
+        const data = this.state.data;
+        const dataLsit = this.state.dataLsit;
         return (
             <div>
-                <p>Home</p>
-                <p><Link to='/list'>to list</Link></p>
-                <p><Link to='/hello'>to Hello</Link></p>
+                <HomeHeader cityName={this.props.cityInfo.cityName} />
+                <Category />
+                <div style={{height:15}}></div>
+                <Ad data={data}/>
+                <List cityName={this.props.cityInfo.cityName} data={dataLsit} getListInfo={this.getListInfo.bind(this)}/>
             </div>
         )
     }
-
 }
+function mapStateToProps(state) {
+    return {
+        cityInfo: state.cityinfo,
+        loadmore:state.loadmore
+    }
+}
+export default connect(
+    mapStateToProps,
+)(Home)

@@ -10,7 +10,6 @@ export default function userinfo(state = initialState,action){
         // 修改城市 
         case actionTypes.UPDATE_CITYNAME:
             return action.data;    
-            
         default:
             return initialState;
     }
