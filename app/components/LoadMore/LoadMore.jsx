@@ -13,7 +13,31 @@ class LoadMore extends Component {
         }
     }
     componentDidMount(){
-        
+        const loadMoreFn = this.props.loadMoreFn;
+        const loadImgMoreFn = this.props.loadImgMoreFn;
+        const wrapper = this.refs.wrapper;
+        let timer;
+        function callback(){
+            // getBoundingClientRect() 获取离屏幕的距离
+            const top = wrapper.getBoundingClientRect().top
+            const windowHeight = window.screen.height;
+            if(top && top < windowHeight){
+                loadMoreFn();
+                loadImgMoreFn();
+            }
+        }
+        window.addEventListener("scroll",function(){
+            if(this.props.isLoadingMore){
+                return
+            }
+            // 截流，使得性能消耗降低，也就是每次判断不在滚动里面进行，及50毫秒执行一次而是在callback函数进行
+            // 降低损耗，定时器不会阻止事件进行，所以当50ms之后滚动没有接着进行，则不会一直执行callback函数
+            if(timer){
+                clearTimeout(timer)
+            }
+            console.log(123)
+            timer = setTimeout(callback,50)
+        }.bind(this),false)
     }
     loadMoreHandler(){
         this.props.actions.loadMore({
@@ -27,7 +51,7 @@ class LoadMore extends Component {
     }
     render() {
         return (
-            <div className="load-more" >
+            <div className="load-more" ref="wrapper">
                 {
                     this.props.isLoadingMore
                     ? <span>加载中...</span>
