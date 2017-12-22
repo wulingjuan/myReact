@@ -23,6 +23,11 @@ router.get('/api/homelist/:city/:page', function* (next) {
     const page = params.page;
 })
 
+// 获取城市列表
+var citylist = require("./city/city");
+router.get('/api/city',function *(next){
+    this.body = citylist;
+})
 
 app.use(router.routes())
     .use(router.allowedMethods());

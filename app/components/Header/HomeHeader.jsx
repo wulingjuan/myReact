@@ -1,13 +1,16 @@
 import React ,{Component} from "react";
 import ReactDOM from "react-dom";
 import "./style";
+import {Link} from "react-router";
 class Header extends Component{
     render(){
         return (
             <div className="clear-fix header">
                 <div className="float-left header-city">
-                    <span>{this.props.cityName}</span>&nbsp;
-                    <i className="icon-angle-down"></i>
+                    <Link to="city" style={{color:"#fff"}}>
+                        <span>{this.props.cityName}</span>&nbsp;
+                        <i className="icon-angle-down"></i>
+                    </Link>
                 </div>
                 <div className="float-right header-user">
                     <i className="icon-user"></i>

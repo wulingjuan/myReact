@@ -8,3 +8,7 @@ export function getListData(city,page) {
     const result = get('/api/homelist/' + city + "/" + page);
     return result;
 }
+export function getCityList(){
+     const result = get('/api/city');
+     return result;
+}

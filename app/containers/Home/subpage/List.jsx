@@ -50,7 +50,6 @@ class List extends Component {
         }).then((json)=>{
             const hasMore = json.hasMore;
             const data = json.data;
-            console.log(data)
             this.setState({
                 data:this.state.data.concat(data),
                 hasMore:hasMore,

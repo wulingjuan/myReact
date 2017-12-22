@@ -8,6 +8,6 @@ export default function loadmore(state = initialState, action) {
         case 'LOAD_MORE':
             return action.data;
         default:
-            return initialState;
+            return state;
     }
 }

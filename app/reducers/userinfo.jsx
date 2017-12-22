@@ -11,6 +11,6 @@ export default function userinfo(state = initialState,action){
         case actionTypes.UPDATE_CITYNAME:
             return action.data;    
         default:
-            return initialState;
+            return state;
     }
 }

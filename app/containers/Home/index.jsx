@@ -5,6 +5,7 @@ import Ad from "../Home/subpage/Ad";
 import List from "../Home/subpage/List";
 import { getHomeAdData } from "./../../../fetch/home/home.js";
 import { getListData } from "./../../../fetch/home/home.js";
+import * as actions from "../../actions/index";
 // import fn from "../redux-demo.js";
 // fn();
 import {connect} from "react-redux";
@@ -42,13 +43,11 @@ class Home extends Component {
     }
     getListInfo(){
         const page = this.props.loadmore.page;
-        console.log(page)
         const result = getListData(this.props.cityInfo.cityName,0);
         result.then(data => {
             return data.json();
         }).then(json => {
             const adLists = json.data;
-            console.log(adLists)
             var arr = [];
             var str = "";
             for (var i = 0; i < adLists.length; i++) {
@@ -79,7 +78,8 @@ class Home extends Component {
 function mapStateToProps(state) {
     return {
         cityInfo: state.cityinfo,
-        loadmore:state.loadmore
+        loadmore:state.loadmore,
+        city:state
     }
 }
 export default connect(

@@ -1,4 +1,5 @@
 import * as actionTypes from "../constants/userinfo";
+import { getCityList} from "../../fetch/home/home";
 export const login = (data)=>{
     return {
         type: actionTypes.USERINFO_LOGIN,
@@ -22,4 +23,11 @@ export const loadMore = (data) => {
         type:'LOAD_MORE',
         data
     }
+}
+// 获取热门城市列表
+export const getCity = () => dispatch =>{
+    return getCityList().then(res=>res.json())
+    .then(json =>{
+        dispatch({type:"CITY_LIST",data:json})
+    })
 }

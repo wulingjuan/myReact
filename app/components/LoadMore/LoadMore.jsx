@@ -35,7 +35,6 @@ class LoadMore extends Component {
             if(timer){
                 clearTimeout(timer)
             }
-            console.log(123)
             timer = setTimeout(callback,50)
         }.bind(this),false)
     }

@@ -15,14 +15,14 @@ class App extends Component{
         }
     }
     componentDidMount() {
-        let cityName;
-        cityName = localStore.getItem(cityName);
-        if (cityName == null) {
-            cityName = "北京";
-        }
+        // let cityName;
+        // cityName = localStore.getItem(cityName);
+        // if (cityName == null) {
+        //     cityName = "北京";
+        // }
         //将城市信息存储到redux 
-        this.props.userInfoActions.updateCity({
-            cityName: "深圳",
+        this.props.userInfoActions.login({
+            cityName: "上海",
             cityLocation: "南方"
         })
         setTimeout(() => {

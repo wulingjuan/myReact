@@ -8,11 +8,12 @@ import Home from "../containers/Home/index";
 import List from "../containers/List/index";
 import Detail from "../containers/Detail/index";
 import Hello from "../containers/Hello/Hello";
+import City from "../containers/City/city";
 import NotFound from "../containers/NotFound/index";
 
 export default class RouteMap extends Component{
     updateHandler(){
-        console.log('每次route变化之后就会触发');
+        // 每次route变化之后就会触发;
         // 统计PV
     }
     render(){
@@ -23,6 +24,7 @@ export default class RouteMap extends Component{
                     <Route path='/' component={App}>
                         <IndexRoute component={Home} />
                         <Route path='list' component={List} />
+                        <Route path='city' component={City} />
                         <Route path='detail/:id' component={Detail} />
                         <Route path='hello' component={Hello} />
                         <Route path='*' component={NotFound} />
