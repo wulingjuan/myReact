@@ -1,5 +1,7 @@
 import * as actionTypes from "../constants/userinfo";
 import { getCityList} from "../../fetch/home/home";
+import { getGoodsList } from "../../fetch/home/home";
+
 export const login = (data)=>{
     return {
         type: actionTypes.USERINFO_LOGIN,
@@ -29,5 +31,13 @@ export const getCity = () => dispatch =>{
     return getCityList().then(res=>res.json())
     .then(json =>{
         dispatch({type:"CITY_LIST",data:json})
+    })
+}
+
+// 获取商品列表页
+export const goodsList = (keyword) => dispatch=>{
+    return getGoodsList(keyword).then(res=>res.json())
+    .then(json=>{
+        dispatch({type:"GOODS_LIST",data:json})
     })
 }

@@ -12,3 +12,7 @@ export function getCityList(){
      const result = get('/api/city');
      return result;
 }
+export function getGoodsList(keyword){
+    const result = get('/api/goodslist/' + keyword);
+    return result;
+}   

@@ -29,6 +29,11 @@ router.get('/api/city',function *(next){
     this.body = citylist;
 })
 
+// 商品列表
+var goodsList = require('./home/list');
+router.get('/api/goodslist/:keyword',function* (next){
+    this.body = goodsList;
+}) 
 app.use(router.routes())
     .use(router.allowedMethods());
 

@@ -1,8 +1,21 @@
 import React ,{Component} from "react";
 import ReactDOM from "react-dom";
+import { Link} from "react-router";
+import SearchInput from "../../components/SearchInput/SearchInput";
+import { hashHistory } from "react-router";
+
+
 import "./style";
-import {Link} from "react-router";
+
 class Header extends Component{
+    constructor(props){
+        super(props);
+    }
+    searchHandler(url) {
+        // hashHistory.push("/search/all"+encodeURLComponent(this.state.keyword))
+        hashHistory.push(`/search/all/${url}`)
+    }
+        
     render(){
         return (
             <div className="clear-fix header">
@@ -15,10 +28,8 @@ class Header extends Component{
                 <div className="float-right header-user">
                     <i className="icon-user"></i>
                 </div>
-                <div className="header-search">
-                    <i className="icon-search"></i>
-                    <input type="text" placeholder="请输入关键字"/>
-                </div>
+                {/* value为默认值 */}
+                <SearchInput enterHandler={this.searchHandler} value=""/>
             </div>
         )
     }
