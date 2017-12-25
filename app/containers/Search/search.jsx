@@ -10,35 +10,59 @@ import "./style.less";
 
 class Search extends Component{
     constructor(props){
+        
         super(props);
         this.state={
-            data:[]
+            data:''
         }
     }
     backClickHandler(){
         window.history.back();
     }
     searchHandler(url) {
+
         // hashHistory.push("/search/all"+encodeURLComponent(this.state.keyword))
         if(url){
-            this.props.actions.goodsList(url)
-            hashHistory.push(`/search/all/${url}}`);
-            this.setState({
-                data: this.props.goodsList
-            })
-            console.log(this.props.goodsList)
+            // hashHistory.push(`/search/all/${url}`);
+            this.props.actions.goodsList('url');
+            // console.log(this.props.goodsList);
+            // this.setState({
+            //     data: this.props.goodsList
+            // })
         }
     }
+
+    componentWillMount(){
+        
+    }
+
     componentDidMount(){
+        
         // this.props.actions.goodsList('11')
         // console.log(this.props.goodsList)
+        // this.setState({
+        //     data:this.props.goodsList
+        // })
+    }
+
+    componentWillReceiveProps(nextProps){
+        const goodsList = nextProps.goodsList.data;
+
+        if(goodsList){
+            this.setState({
+                data:goodsList
+            })
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        return true
     }
 
     render(){
         const keyword = this.props.params.keyword;
-        const goodsList = this.state.data;
-        // this.props.actions.goodsList('11')
-        // console.log(this.props.goodsList)
+        const {data} = this.state;
+     
         return (
             <div className="search">
                 <div className="search-header">
@@ -47,8 +71,13 @@ class Search extends Component{
                     </span>
                     <SearchInput enterHandler={this.searchHandler.bind(this)} value={keyword || ""}/>
                 </div>
-                {goodsList.length > 0 ? goodsList.map((item,key)=><div key={key}>{item}</div>)
-                :""
+                {
+                    data ?
+                    data.map(
+                         (item,key)=>
+                         <div key={key}>{key}</div>
+                        )
+                    :""
                 }
             </div>
         )
