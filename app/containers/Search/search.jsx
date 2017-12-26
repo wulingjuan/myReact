@@ -60,10 +60,8 @@ class Search extends Component{
 
     render(){
         const keyword = this.props.params.keyword || this.props.params.category;
-        console.log(keyword)
         const {imgData} = this.state;
         const data = this.props.goodsList;
-        console.log(data)
         return (
             <div className="search">
                 <div className="search-header">

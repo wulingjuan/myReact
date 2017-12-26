@@ -33,7 +33,7 @@ class LoadMore extends Component{
             <div ref="wrapper" style={{textAlign:"center",padding:10,color:"#666"}} className="load-more">
                 {
                     isLoading ?
-                    <img src={require("../imgs/loader.gif")} />
+                    <img src={require("../imgs/loader.gif")} style={{display:"block",margin:"auto"}}/>
                     :<span>加载更多</span>
                 }
             </div>

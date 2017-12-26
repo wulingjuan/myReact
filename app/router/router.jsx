@@ -1,6 +1,5 @@
 import React ,{Component} from "react";
 import {Router,Route,IndexRoute} from "react-router";
-
 import configStore from "../store/index.js";
 import {Provider} from "react-redux";
 import App from "../containers/App";
@@ -11,6 +10,8 @@ import City from "../containers/City/city";
 import NotFound from "../containers/NotFound/index";
 import Search from "../containers/Search/search";
 import Detail from "../containers/Detail/index";
+import Login from "../containers/Login/login";
+
 export default class RouteMap extends Component{
     updateHandler(){
         // 每次route变化之后就会触发;
@@ -27,7 +28,7 @@ export default class RouteMap extends Component{
                         <Route path="search/:category(/:keyword)" component={Search}/>
                         <Route path='city' component={City} />
                         <Route path='detail/:id' component={Detail} />
-                        <Route path='hello' component={Hello} />
+                        <Route path='login' component={Login} />
                         <Route path='*' component={NotFound} />
                     </Route>
                 </Router>

@@ -19,17 +19,21 @@ class Detail extends Component{
         }
     }
     LoadData(){
+        if(this.state.page>2){
+            this.setState({
+                hasMore:false
+            })
+            return;
+        }
         this.setState({
             isLoading:true
         })
-        console.log(this.state.page)
         const id = this.props.params;
         const page = this.state.page;
         const result = getComment(id,page);
         
         result.then(res=>res.json()
             .then(json=>{
-                console.log(json)
                 this.setState({
                     data:json.data.concat(this.state.data),
                     page:this.state.page+1,
@@ -49,6 +53,7 @@ class Detail extends Component{
             <div id="detail">
                 <Header title={"商品详情"}/>
                 <Info id={id}/>
+                <div style={{height:15}}></div>
                 <CommentList data={data} />
                 {
                     hasMore ?

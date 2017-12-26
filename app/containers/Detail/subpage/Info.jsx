@@ -15,7 +15,6 @@ class Info extends Component{
         
     }
     render(){
-        console.log(this.props.detailInfo)
         const infoData = this.props.detailInfo;
         return (
             <div className="clear-fix detail-info">
@@ -25,7 +24,7 @@ class Info extends Component{
                 <div className="float-left detail-allInfo">
                     <h2 className="detail-title">{infoData.title}</h2>
                     <div className="clear-fix detail-star">
-                        <Star count={infoData.star}/>
+                        <Star star={infoData.star}/>
                         <p className="detail-star-price">
                             <span className="price">￥{infoData.price}</span>
                         </p>

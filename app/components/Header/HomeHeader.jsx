@@ -29,7 +29,9 @@ class Header extends Component{
                     </Link>
                 </div>
                 <div className="float-right header-user">
-                    <i className="icon-user"></i>
+                    <Link to="login">
+                        <i className="icon-user"></i>
+                    </Link>
                 </div>
                 {/* value为默认值 */}
                 <SearchInput enterHandler={this.searchHandler.bind(this)} value=""/>

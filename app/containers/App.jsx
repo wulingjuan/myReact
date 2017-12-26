@@ -7,6 +7,9 @@ import { CITYNAME } from "../config/localStorageCityName.js";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as userInfoActionsOtherFiles from "../actions/index";
+
+import "../static/app.less";
+
 class App extends Component{
     constructor(props) {
         super(props);
@@ -35,7 +38,14 @@ class App extends Component{
     render(){
         return (
             <div>
-                {this.state.initDone ? this.props.children : <div>加载中...</div>}
+                {
+                    this.state.initDone ? 
+                    this.props.children :
+                    <div className="app-loading">
+                        <img src={require(".//Detail/imgs/loader.gif")} alt=""/>
+                        <p>加载中...</p>
+                    </div>
+                }
             </div>
         )
     }
