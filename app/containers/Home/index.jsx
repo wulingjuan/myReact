@@ -9,7 +9,6 @@ import * as actions from "../../actions/index";
 // import fn from "../redux-demo.js";
 // fn();
 import {connect} from "react-redux";
-
 class Home extends Component {
     constructor(props){
         super(props);

@@ -6,12 +6,11 @@ import {Provider} from "react-redux";
 import App from "../containers/App";
 import Home from "../containers/Home/index";
 import List from "../containers/List/index";
-import Detail from "../containers/Detail/index";
 import Hello from "../containers/Hello/Hello";
 import City from "../containers/City/city";
 import NotFound from "../containers/NotFound/index";
 import Search from "../containers/Search/search";
-
+import Detail from "../containers/Detail/index";
 export default class RouteMap extends Component{
     updateHandler(){
         // 每次route变化之后就会触发;

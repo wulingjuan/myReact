@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import { Link} from "react-router";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import { hashHistory } from "react-router";
-
+import {connect} from "react-redux";
+import * as actions from "../../actions/index";
 
 import "./style";
 
@@ -13,9 +14,11 @@ class Header extends Component{
     }
     searchHandler(url) {
         // hashHistory.push("/search/all"+encodeURLComponent(this.state.keyword))
+        const {dispatch} = this.props;
+        dispatch(actions.goodsList(url));
         hashHistory.push(`/search/all/${url}`)
     }
-        
+    
     render(){
         return (
             <div className="clear-fix header">
@@ -29,9 +32,12 @@ class Header extends Component{
                     <i className="icon-user"></i>
                 </div>
                 {/* value为默认值 */}
-                <SearchInput enterHandler={this.searchHandler} value=""/>
+                <SearchInput enterHandler={this.searchHandler.bind(this)} value=""/>
             </div>
         )
     }
 }
-export default Header;
+const mapState = state => state;
+export default connect(
+    mapState
+)(Header);

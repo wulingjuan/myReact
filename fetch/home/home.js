@@ -16,3 +16,12 @@ export function getGoodsList(keyword){
     const result = get('/api/goodslist/' + keyword);
     return result;
 }   
+export function getDetailInfo(id) {
+    const result = get('/api/detailInfo/' + id);
+    return result;
+} 
+// 获取评价列表
+export function getComment(id,page) {
+    const result = get('/api/comment/' + id + '/' + page);
+    return result;
+} 

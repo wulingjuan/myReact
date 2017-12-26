@@ -29,11 +29,24 @@ router.get('/api/city',function *(next){
     this.body = citylist;
 })
 
-// 商品列表
-var goodsList = require('./home/list');
+// 商户列表
+var goodsList = require('./home/goodslist');
 router.get('/api/goodslist/:keyword',function* (next){
     this.body = goodsList;
 }) 
+
+// 商户详情
+var detailInfo = require('./home/detailInfo');
+router.get('/api/detailInfo/:id', function* (next) {
+    this.body = detailInfo;
+}) 
+
+// 商户评价列表
+var commentList = require('./home/comment');
+router.get('/api/comment/:id/:page', function* (next) {
+    this.body = commentList;
+}) 
+
 app.use(router.routes())
     .use(router.allowedMethods());
 

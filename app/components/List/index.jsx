@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import {Link} from "react-router";
 
 class List extends Component {
     constructor(props) {
@@ -11,8 +12,8 @@ class List extends Component {
         return (
             <div className="home-item">
                 <ul>
-                    {data.map((item,index)=>{
-                        return <li key={index} className="clear-fix home-list-item">
+                    {data.length>0 ? data.map((item,index)=>{
+                        return <Link to={`/detail/${item.mumber}`} key={index}><li className="clear-fix home-list-item">
                             <div className="float-left home-list-item-left">
                                 <img src={imgData[index]} alt="" />
                             </div>
@@ -29,8 +30,8 @@ class List extends Component {
                                     <span className="float-right mumber">已售{item.mumber}</span>
                                 </p>
                             </div>
-                        </li>
-                    })}
+                        </li></Link>
+                    }) : ""}
                 </ul>
             </div>
         )

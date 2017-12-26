@@ -4,65 +4,66 @@ import { hashHistory } from "react-router";
 import { connect} from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../../actions/index";
-
+import LoadMore from "../../components/LoadMore/LoadMore";
+import List from "../../components/List/index";
 import "./style.less";
 
 
 class Search extends Component{
     constructor(props){
-        
         super(props);
         this.state={
-            data:''
+            imgData:[],
+            data:[]
         }
     }
     backClickHandler(){
         window.history.back();
     }
     searchHandler(url) {
-
-        // hashHistory.push("/search/all"+encodeURLComponent(this.state.keyword))
         if(url){
-            // hashHistory.push(`/search/all/${url}`);
-            this.props.actions.goodsList('url');
-            // console.log(this.props.goodsList);
-            // this.setState({
-            //     data: this.props.goodsList
-            // })
+            this.props.actions.goodsList(url);
         }
     }
-
-    componentWillMount(){
-        
-    }
-
     componentDidMount(){
-        
-        // this.props.actions.goodsList('11')
-        // console.log(this.props.goodsList)
-        // this.setState({
-        //     data:this.props.goodsList
-        // })
-    }
-
-    componentWillReceiveProps(nextProps){
-        const goodsList = nextProps.goodsList.data;
-
-        if(goodsList){
-            this.setState({
-                data:goodsList
-            })
+        const url = this.props.params.keyword || this.props.params.category;
+        this.searchHandler(url);
+        const goodsList = this.props.goodsList;
+        const arr = [];
+        for (var i = 0; i < goodsList.length; i++) {
+            (function (i) {
+                const str = require(`${goodsList[i].img}`);
+                arr.push(str);
+            })(i)
         }
+        this.setState({
+            // data:this.props.goodsList,
+            imgData: arr
+        })
     }
-
+    componentWillReceiveProps(nextProps,nextState){
+        const goodsList = nextProps.goodsList;
+        const arr = [];
+        for(var i=0;i<goodsList.length;i++){
+            (function(i){
+                const str = require(`${goodsList[i].img}`);
+                arr.push(str);
+            })(i)
+        }
+        this.setState({
+            imgData:arr
+        })
+    }
     shouldComponentUpdate(nextProps, nextState){
         return true
     }
 
     render(){
-        const keyword = this.props.params.keyword;
-        const {data} = this.state;
-     
+        const keyword = this.props.params.keyword || this.props.params.category;
+        console.log(keyword)
+        const {imgData} = this.state;
+        const data = this.props.goodsList;
+        console.log(data)
         return (
             <div className="search">
                 <div className="search-header">
@@ -71,14 +72,8 @@ class Search extends Component{
                     </span>
                     <SearchInput enterHandler={this.searchHandler.bind(this)} value={keyword || ""}/>
                 </div>
-                {
-                    data ?
-                    data.map(
-                         (item,key)=>
-                         <div key={key}>{key}</div>
-                        )
-                    :""
-                }
+                <List data={data} imgData={imgData}/>
+                <div style={{padding:10,textAlign:"center",color:"#666"}}>暂无更多数据</div>
             </div>
         )
     }
