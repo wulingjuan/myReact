@@ -26,7 +26,6 @@ class App extends Component{
         //将城市信息存储到redux 
         this.props.userInfoActions.login({
             cityName: "上海",
-            cityLocation: "南方"
         })
         setTimeout(() => {
             this.setState({

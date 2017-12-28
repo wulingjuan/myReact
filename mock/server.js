@@ -47,6 +47,11 @@ router.get('/api/comment/:id/:page', function* (next) {
     this.body = commentList;
 }) 
 
+// 用户登录接口
+var user = require('./home/user');
+router.get('/api/user', function* (next) {
+    this.body = commentList;
+}) 
 app.use(router.routes())
     .use(router.allowedMethods());
 

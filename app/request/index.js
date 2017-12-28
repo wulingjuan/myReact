@@ -25,7 +25,7 @@ export const myhome = (jfuid) => {
 }
 
 // 获取消息
-export const getmessage = (method,rid) => {
+export const GET_MESSAGE = (rid) => {
     const baseUrl = "https://gateway.mshuoke.com"
     const dataParams = {
         rid: { location: 'query', key: 'rid', value: '', require: "true" },

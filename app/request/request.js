@@ -38,8 +38,6 @@ export const apiParams = function (baseUrl,url, method, config) {
             if (data[i] != '') {
                 this.config[i].value = data[i];
             }
-            console.log(this.config[i].location)
-            debugger
             if (this.config[i].require || this.config[i].value) {//传入参数位置参数为必填或者已经填写则进行解析
                 if (this.config[i].location == PATH_PARAM.PATH) {
                     this.url = this.url.replace(MASK.LEFT + this.config[i].key + MASK.RIGHT, this.config[i].value);
@@ -53,7 +51,6 @@ export const apiParams = function (baseUrl,url, method, config) {
                 if (this.config[i].location == PATH_PARAM.HEADER) {
                     headersData[config[i].key] = this.config[i].value;
                     this.headers = headersData;
-                    debugger;
                 }
                 // 参数位置为params/query
                 if (this.config[i].location == PATH_PARAM.PARAMS || this.config[i].location == PATH_PARAM.QUERY) {

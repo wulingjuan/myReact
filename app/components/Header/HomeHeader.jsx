@@ -29,7 +29,7 @@ class Header extends Component{
                     </Link>
                 </div>
                 <div className="float-right header-user">
-                    <Link to="login">
+                    <Link to="user">
                         <i className="icon-user"></i>
                     </Link>
                 </div>

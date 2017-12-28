@@ -11,6 +11,8 @@ import NotFound from "../containers/NotFound/index";
 import Search from "../containers/Search/search";
 import Detail from "../containers/Detail/index";
 import Login from "../containers/Login/login";
+import UserCenter from "../containers/userCenter/userCenter";
+
 
 export default class RouteMap extends Component{
     updateHandler(){
@@ -28,7 +30,8 @@ export default class RouteMap extends Component{
                         <Route path="search/:category(/:keyword)" component={Search}/>
                         <Route path='city' component={City} />
                         <Route path='detail/:id' component={Detail} />
-                        <Route path='login' component={Login} />
+                        <Route path='login(/:router)' component={Login} />
+                        <Route path='user' component={UserCenter} />
                         <Route path='*' component={NotFound} />
                     </Route>
                 </Router>

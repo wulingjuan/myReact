@@ -16,9 +16,9 @@ class City extends Component {
     
     cityChangeHandler(value){
         const { dispatch } = this.props;
-        dispatch(actions.updateCity({
-            cityName:value
-        }))
+        let cityinfo = this.props.cityinfo;
+        cityinfo.cityName = value;
+        dispatch(actions.updateCity(cityinfo));
         hashHistory.push('/')
     }
     // 1、改变城市，改变redux

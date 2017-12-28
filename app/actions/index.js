@@ -2,9 +2,18 @@ import * as actionTypes from "../constants/userinfo";
 import { getCityList} from "../../fetch/home/home";
 import { getGoodsList } from "../../fetch/home/home";
 import { getDetailInfo} from "../../fetch/home/home.js";
+import * as Request from "../request/request.js";
+import * as RequestType from "../request/index";
+
 export const login = (data)=>{
     return {
         type: actionTypes.USERINFO_LOGIN,
+        data
+    }
+}
+export const update = (data) => {
+    return {
+        type: "UPDATE_USERINFO",
         data
     }
 }
@@ -49,3 +58,4 @@ export const detailInfo = (id) => dispatch=>{
         dispatch({type:"DETAIL_INFO", data: json})
     })
 }
+
