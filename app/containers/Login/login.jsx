@@ -1,7 +1,5 @@
 import React ,{Component} from "react";
 import Header from "../Header/index";
-import * as Request from "../../request/request.js";
-import * as RequestType from "../../request/index.js";
 import {connect} from "react-redux";
 import { hashHistory} from "react-router";
 import LoginComponent from "../../containers/Login/subpage/LoginComponent";
@@ -38,10 +36,6 @@ class Login extends Component{
         }
     }
     componentDidMount() {
-        var params = RequestType.getmessage("20171211022546546");
-        Request.publicMethod(params,function(res){
-            console.log(res.data);
-        })
         
     }
     render(){

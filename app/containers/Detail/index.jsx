@@ -5,6 +5,7 @@ import Info from "./subpage/Info";
 import CommentList from "./subpage/commentList";
 import {getComment} from "../../../fetch/home/home.js";
 import LoadMore from "./subpage/LoadMore";
+import StoreAndBuy from "./subpage/storeAndBuy";
 
 import "./style.less";
 
@@ -53,6 +54,7 @@ class Detail extends Component{
             <div id="detail">
                 <Header title={"商品详情"}/>
                 <Info id={id}/>
+                <StoreAndBuy id={id}/>
                 <div style={{height:15}}></div>
                 <CommentList data={data} />
                 {
