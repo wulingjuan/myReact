@@ -52,6 +52,13 @@ var user = require('./home/user');
 router.get('/api/user', function* (next) {
     this.body = commentList;
 }) 
+
+// 个人中心订单列表
+var orderList = require('./orderList/orderList');
+router.get('/api/orderlist/:username', function* (next) {
+    this.body = orderList;
+}) 
+
 app.use(router.routes())
     .use(router.allowedMethods());
 

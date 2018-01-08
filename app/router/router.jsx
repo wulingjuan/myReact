@@ -12,7 +12,7 @@ import Search from "../containers/Search/search";
 import Detail from "../containers/Detail/index";
 import Login from "../containers/Login/login";
 import UserCenter from "../containers/userCenter/userCenter";
-
+import CommentMarket from "../containers/Comment/Comment";
 
 export default class RouteMap extends Component{
     updateHandler(){
@@ -32,6 +32,7 @@ export default class RouteMap extends Component{
                         <Route path='detail/:id' component={Detail} />
                         <Route path='login(/:router)' component={Login} />
                         <Route path='user' component={UserCenter} />
+                        <Route path='comment/:id' component={CommentMarket} />
                         <Route path='*' component={NotFound} />
                     </Route>
                 </Router>

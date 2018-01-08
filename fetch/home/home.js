@@ -25,3 +25,8 @@ export function getComment(id,page) {
     const result = get('/api/comment/' + id + '/' + page);
     return result;
 } 
+// 获取订单列表
+export function getOrderList(username) {
+    const result = get('/api/orderlist/' + username);
+    return result;
+} 

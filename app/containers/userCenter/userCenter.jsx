@@ -4,6 +4,7 @@ import UserInfoHeader from "../../components/userInfo/header";
 import OrderList from "./subPage/orderList";
 import { hashHistory } from "react-router";
 import {connect} from "react-redux";
+import * as http from "../../../fetch/home/home.js";
 
 import "./style.less";
 
@@ -13,6 +14,8 @@ class UserCenter extends Component {
         this.state = {
             checking: true,
             username:"",
+            arr:[],
+            arrImg:[],
         }
     }
     doCheck() {
@@ -35,10 +38,24 @@ class UserCenter extends Component {
         hashHistory.push("/");
     }
     componentDidMount(){
-        this.doCheck()
+        let arrData = [];
+        let str = '';
+        this.doCheck();
+        http.getOrderList(this.state.username).then(res=>res.json())
+            .then(json=>{
+                console.log(json)
+                for(var i=0;i<json.length;i++){
+                    str = require(`${json[i].img}`);
+                    arrData.push(str)
+                }
+                this.setState({
+                    arr:json,
+                    arrImg:arrData
+                })
+        })
     }
     render() {
-        const arr=[1,2,3,4]
+        const {arr,arrImg} = this.state;
         return (
             this.state.checking ?
             <div className="login-hint">
@@ -49,7 +66,8 @@ class UserCenter extends Component {
             <div>
                 <Header title="用户中心"/>
                 <UserInfoHeader userName={this.state.username} cityName={this.props.cityinfo.cityName}/>
-                <OrderList list={arr}/>
+                <div style={{height:15}}></div>
+                <OrderList list={arr} imgList={arrImg}/>
                 {/* <button onClick={this.loginOut.bind(this)}>退出</button> */}
             </div>
         )
