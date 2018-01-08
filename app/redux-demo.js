@@ -19,10 +19,10 @@ export default function(){
 
     // 定义数据即（state）变化之后生成的派发规则
     store.subscribe(()=>{
-        console.log("fn1-> current state"+store.getState());
+        // console.log("fn1-> current state"+store.getState());
     })
     store.subscribe(() => {
-        console.log("fn2-> current state" + store.getState());
+        // console.log("fn2-> current state" + store.getState());
     })
     // 触发数据变化
     store.dispatch({type:"INCREMENT"});

@@ -43,7 +43,7 @@ class UserCenter extends Component {
         this.doCheck();
         http.getOrderList(this.state.username).then(res=>res.json())
             .then(json=>{
-                console.log(json)
+                // console.log(json)
                 for(var i=0;i<json.length;i++){
                     str = require(`${json[i].img}`);
                     arrData.push(str)

@@ -8,7 +8,7 @@ export function getData() {
     result.then(res => {
         return res.text()
     }).then(text => {
-        console.log(text)
+        // console.log(text)
     })
 
     // '/api/2' 获取json
@@ -17,7 +17,7 @@ export function getData() {
     result1.then(res => {
         return res.json()
     }).then(json => {
-        console.log(json)
+        // // console.log(json)
     })
 }
 
@@ -31,6 +31,6 @@ export function postData() {
     result.then(res => {
         return res.json()
     }).then(json => {
-        console.log(json)
+        // console.log(json)s
     })
 }

@@ -10,7 +10,7 @@ export const publicMethod = function (obj, callback) {
     INSTANCE({method: obj.method, url: obj.url, data: obj.data, headers: obj.headers }).then(function (res) {
         callback(res);
     }).catch(function (err) {
-        console.log(err);
+        // console.log(err);
     })
 }
 // 构建发起网络请求所需参数
@@ -55,7 +55,7 @@ export const apiParams = function (baseUrl,url, method, config) {
                 // 参数位置为params/query
                 if (this.config[i].location == PATH_PARAM.PARAMS || this.config[i].location == PATH_PARAM.QUERY) {
                     if (/\?/.test(this.config[i].location)) {
-                        console.log(this.url)
+                        // console.log(this.url)
                         this.url += "&" + this.config[i].key + "=" + this.config[i].value;
                     }
                     else {

@@ -22,10 +22,8 @@ class Comment extends Component {
     }
     printKeyUpHandler(e){
         const value = e.target.value;
-        // console.log(value.length)
         const minusNum = 100 - parseInt(value.length);
         const eightNum = 8 - parseInt(value.length);
-        console.log(minusNum)
         const hintText = `还需要输入${eightNum}个字`;
         this.setState({
             minusNum: minusNum,

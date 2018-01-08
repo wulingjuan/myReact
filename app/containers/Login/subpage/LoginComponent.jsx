@@ -31,7 +31,7 @@ class LoginComponent extends Component{
     }
     loginClickHandler(e){
         const phoneNumber = this.state.phoneNumber;
-        console.log(phoneNumber)
+        // console.log(phoneNumber)
         const psd = this.state.psd;
         var phoneReg = /^[1]{1}[0-9]{10}$/;
         if(!phoneNumber){

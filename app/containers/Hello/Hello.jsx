@@ -27,7 +27,7 @@ class Hello extends Component{
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.userinfo)
+    // console.log(state.userinfo)
     return {
         userinfo:state.userinfo
     }
