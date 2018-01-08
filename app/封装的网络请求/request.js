@@ -1,26 +1,19 @@
-import axios from "axios";
-import { PATH_PARAM,MASK } from "./util";
-
-const INSTANCE = axios.create({
-    baseURL:"https://gateway.mshuoke.com"
+var INSTANCE = axios.create({
+    baseURL: 'https://gateway.mshuoke.com',
 });
-
 // 封装网络请求公共处理方法
-export const publicMethod = function (obj, callback) {
-    INSTANCE({method: obj.method, url: obj.url, data: obj.data, headers: obj.headers }).then(function (res) {
-        callback(res);
-    }).catch(function (err) {
-        // console.log(err);
-    })
+var publicMethod = function (obj) {
+    return INSTANCE({ baseUrl:obj.baseUrl,method: obj.method, url: obj.url, data: obj.data, headers: obj.headers });
 }
+
 // 构建发起网络请求所需参数
-export const apiParams = function (baseUrl,url, method, config) {
+var apiParams = function (baseUrl, url, method, config) {
     this.config = config;
     this.url = url;
     this.method = method;
+    this.baseUrl = baseUrl;
     this.data = {};
     this.headers = {};
-    this.baseUrl = baseUrl;
     //定义查询需求参数方法
     this.getParams = function () {
         var apiArr = [];
@@ -31,7 +24,6 @@ export const apiParams = function (baseUrl,url, method, config) {
     }
     this.setParams = function (data) {
         var headersData = {};
-        var sendData = {};
         // 参数位置为path
         for (var i in this.config) {
             // data传入的值为非空才进行替换，否则使用默认设置值
@@ -44,18 +36,15 @@ export const apiParams = function (baseUrl,url, method, config) {
                 }
                 // 参数位置为body
                 if (this.config[i].location == PATH_PARAM.BODY) {
-                    sendData[config[i].key] = this.config[i].value;
-                    this.data = sendData;
+                    this.data = this.config[i].value;
                 }
                 // 参数位置为header
                 if (this.config[i].location == PATH_PARAM.HEADER) {
-                    headersData[config[i].key] = this.config[i].value;
-                    this.headers = headersData;
+                    this.headers = this.config[i].value;
                 }
                 // 参数位置为params/query
                 if (this.config[i].location == PATH_PARAM.PARAMS || this.config[i].location == PATH_PARAM.QUERY) {
-                    if (/\?/.test(this.config[i].location)) {
-                        // console.log(this.url)
+                    if (/\?/g.test(this.url)) {
                         this.url += "&" + this.config[i].key + "=" + this.config[i].value;
                     }
                     else {
@@ -70,3 +59,16 @@ export const apiParams = function (baseUrl,url, method, config) {
     }
 }
 
+var dataParams = {
+    userid: { location: 'path', key: 'userid', value: '', require: "true" },
+    version: { location: 'header', key: 'version', value: "v1", require: "true" }
+};
+
+var apiObject = new apiParams("/customer/user/{userid}/enterpriseinfo", "get", dataParams);
+apiObject.setParams({ userid: "30", version: "v1" });
+
+publicMethod(apiObject).then(function(res){
+    console.log(res)
+}).catch(function(err){
+    console.logr(err)
+});

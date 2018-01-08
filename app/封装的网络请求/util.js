@@ -1,11 +1,11 @@
-export const PATH_PARAM = {
+var PATH_PARAM = {
     PATH:"path",
     BODY:'body',
     HEADER:'header',
     PARAMS:'params',
     QUERY:"query"
 }
-export const MASK = {
+var MASK = {
     LEFT:"{",
     RIGHT:'}'
 }
