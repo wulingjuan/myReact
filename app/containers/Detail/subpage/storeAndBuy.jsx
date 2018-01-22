@@ -1,5 +1,5 @@
 import React ,{Component} from "react";
-import {hashHistory} from "react-router";
+import {browserHistory} from "react-router";
 
 class StoreAndBuy extends Component{
     constructor(props){
@@ -17,7 +17,7 @@ class StoreAndBuy extends Component{
         })
     }
     buyHandler(){
-    //    hashHistory.push("/buy"); 
+    //    browserHistory.push("/buy"); 
     }
     render(){
         return ( 

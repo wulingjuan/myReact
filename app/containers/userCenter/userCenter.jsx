@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "../Header/index";
 import UserInfoHeader from "../../components/userInfo/header";
 import OrderList from "./subPage/orderList";
-import { hashHistory } from "react-router";
+import { browserHistory } from "react-router";
 import {connect} from "react-redux";
 import * as http from "../../../fetch/home/home.js";
 
@@ -13,7 +13,6 @@ class UserCenter extends Component {
         super(props)
         this.state = {
             checking: true,
-            username:"",
             arr:[],
             arrImg:[],
         }
@@ -23,25 +22,25 @@ class UserCenter extends Component {
         if (!username) {
             // 登录跳转用户中心
             setTimeout(function() {
-                hashHistory.push('/login');
+                browserHistory.push('/login');
             }, 2000);
         } else {
             // 已登录
             this.setState({
-                checking: false,
-                username: username,
+                checking:false,
             })
         }
     }
     loginOut(){
         sessionStorage.removeItem("username");
-        hashHistory.push("/");
+        browserHistory.push("/");
     }
     componentDidMount(){
         let arrData = [];
         let str = '';
         this.doCheck();
-        http.getOrderList(this.state.username).then(res=>res.json())
+        const username = sessionStorage.getItem("username");
+        http.getOrderList(username).then(res=>res.json())
             .then(json=>{
                 // console.log(json)
                 for(var i=0;i<json.length;i++){
@@ -55,9 +54,9 @@ class UserCenter extends Component {
         })
     }
     render() {
-        const {arr,arrImg} = this.state;
+        const { arr, arrImg, checking} = this.state;
         return (
-            this.state.checking ?
+            checking ?
             <div className="login-hint">
                 <div className="login-hintText">
                     请先登录

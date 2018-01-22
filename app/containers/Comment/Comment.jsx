@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "../Header/index";
 import CommentStar from "./subpage/CommentStar/CommentStar";
-import {hashHistory} from "react-router";
+import {browserHistory} from "react-router";
 import "./style.less";
 
 
@@ -42,7 +42,7 @@ class Comment extends Component {
             return
         }
         alert("评价成功") 
-        hashHistory.push('/')
+        browserHistory.push('/')
     }
     render() {
         const { hintText, minusNum } = this.state;

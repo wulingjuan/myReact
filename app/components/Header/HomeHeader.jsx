@@ -2,7 +2,7 @@ import React ,{Component} from "react";
 import ReactDOM from "react-dom";
 import { Link} from "react-router";
 import SearchInput from "../../components/SearchInput/SearchInput";
-import { hashHistory } from "react-router";
+import { browserHistory } from "react-router";
 import {connect} from "react-redux";
 import * as actions from "../../actions/index";
 
@@ -13,10 +13,10 @@ class Header extends Component{
         super(props);
     }
     searchHandler(url) {
-        // hashHistory.push("/search/all"+encodeURLComponent(this.state.keyword))
+        // browserHistory.push("/search/all"+encodeURLComponent(this.state.keyword))
         const {dispatch} = this.props;
         dispatch(actions.goodsList(url));
-        hashHistory.push(`/search/all/${url}`)
+        browserHistory.push(`/search/all/${url}`)
     }
     
     render(){

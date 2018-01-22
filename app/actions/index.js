@@ -1,9 +1,8 @@
 import * as actionTypes from "../constants/userinfo";
+import {createAction} from "redux-actions";
 import { getCityList} from "../../fetch/home/home";
 import { getGoodsList } from "../../fetch/home/home";
 import { getDetailInfo} from "../../fetch/home/home.js";
-import * as Request from "../request/request.js";
-import * as RequestType from "../request/index";
 
 export const login = (data)=>{
     return {
@@ -11,6 +10,11 @@ export const login = (data)=>{
         data
     }
 }
+
+// export const login = createAction({ USERINFO_LOGIN: data => ({ data })});
+// export const updateCity = createAction({ UPDATE_CITYNAME: data => ({ data }) });
+
+
 export const update = (data) => {
     return {
         type: "UPDATE_USERINFO",

@@ -1,4 +1,5 @@
 import {combineReducers} from "redux";
+import { reducer as formReducer } from 'redux-form'
 import userinfo from "./userinfo";
 import cityinfo from "./cityinfo";
 import loadmore from "./loadmore";
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     loadmore, 
     getCityList,
     goodsList,
-    detailInfo
+    detailInfo,
+    form:formReducer 
 });
 
 export default rootReducer;

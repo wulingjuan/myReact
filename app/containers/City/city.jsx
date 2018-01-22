@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import * as actions from "../../actions/index";
 // import { getCityList} from "../../../fetch/home/home.js"
 import Header from "../Header/index";
-import { hashHistory } from "react-router";
 import "./style.less";
 class City extends Component {
     constructor(props){
@@ -19,7 +18,7 @@ class City extends Component {
         let cityinfo = this.props.cityinfo;
         cityinfo.cityName = value;
         dispatch(actions.updateCity(cityinfo));
-        hashHistory.push('/')
+        browserHistory.push('/')
     }
     // 1、改变城市，改变redux
     // 2、存储localstorage当中

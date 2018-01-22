@@ -1,7 +1,7 @@
 import React ,{Component} from "react";
 import Header from "../Header/index";
 import {connect} from "react-redux";
-import { hashHistory} from "react-router";
+import { browserHistory} from "react-router";
 import LoginComponent from "../../containers/Login/subpage/LoginComponent";
 import * as actions from "../../actions/index";
 
@@ -29,10 +29,10 @@ class Login extends Component{
         const router = "/user"
         if(router){
             // 跳转到之前跳过来的页面
-            hashHistory.push(router);
+            browserHistory.push(router);
         }
         else{
-            hashHistory.push('/user');
+            browserHistory.push('/user');
         }
     }
     componentDidMount() {

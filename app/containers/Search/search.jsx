@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import SearchInput from "../../components/SearchInput/SearchInput";
-import { hashHistory } from "react-router";
+import { browserHistory } from "react-router";
 import { connect} from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../../actions/index";

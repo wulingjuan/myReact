@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {hashHistory} from "react-router";
+import {browserHistory} from "react-router";
 import "./style.less";
 
 
@@ -8,7 +8,7 @@ class OrderList extends Component {
         super(props);
     }
     commentHandler(id){
-        hashHistory.push("comment/"+ encodeURIComponent(id));
+        browserHistory.push("comment/"+ encodeURIComponent(id));
     }
     render() {
         const {list,imgList} = this.props;

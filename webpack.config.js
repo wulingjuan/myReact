@@ -22,6 +22,9 @@ const config = {
                 secure: false
             }
         },
+        historyApiFallback:{
+            disableDotRule: true,
+        }
     },
     
     resolve: {
